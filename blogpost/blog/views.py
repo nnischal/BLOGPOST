@@ -6,7 +6,7 @@ from .forms import PostForm
 
 #List all posts
 def post_list(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-updated_at')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 #Create a new post
@@ -23,6 +23,7 @@ def post_create(request):
 #Edit an existing post
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    print(post)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -30,6 +31,8 @@ def post_edit(request, pk):
             return redirect('post_list')
     else:
         form = PostForm(instance=post)
+        
+    print(form)
     return render(request, 'blog/post_edit.html', {'form': form})
 
 #view post

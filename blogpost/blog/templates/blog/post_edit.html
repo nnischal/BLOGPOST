@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{%block content%}
+
+    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-md">
+        <h1 class="text-3xl font-bold mb-6 text-center">Edit Post</h1>
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            {{ form}}
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Save Changes
+            </button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <a href="{% url 'post_list' %}" class="text-blue-600 hover:underline">← Back to post list</a>
+        </div>
+    </div>
+
+{% endblock %}
